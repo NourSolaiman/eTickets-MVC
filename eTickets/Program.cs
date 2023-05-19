@@ -1,3 +1,5 @@
+using eTickets.Data;
+
 namespace eTickets
 {
     public class Program
@@ -6,6 +8,9 @@ namespace eTickets
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            //DbContext configuration
+
+            builder.Services.AddDbContext<AppDbContext>();
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
