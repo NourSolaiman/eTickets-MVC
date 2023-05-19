@@ -1,4 +1,8 @@
 using eTickets.Data;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace eTickets
 {
@@ -8,11 +12,15 @@ namespace eTickets
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            //DbContext configuration
+            // Get Configuration from app settings
+            var Configuration = builder.Configuration;
 
-            builder.Services.AddDbContext<AppDbContext>();
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            //DbContext configuration
+            builder.Services.AddDbContext<AppDbContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnectionString")));
 
             var app = builder.Build();
 
