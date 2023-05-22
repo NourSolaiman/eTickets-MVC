@@ -7,7 +7,7 @@ namespace eTickets.Models
         [Key]
         public int Id { get; set; }
 
-        [Display(Name ="Profile Picture URL")] //This way we indicate how we want to display prop. name on the page
+        [Display(Name ="Profile Picture")] //This way we indicate how we want to display prop. name on the page
         public string ProfilePictureURL { get; set; }
 
 

@@ -1,9 +1,9 @@
-﻿<!-- Define model, we are using IEnumerable<Actor> instead of List<Actor>,becouse hard coding names in <th> is not option in this case -->
-@model IEnumerable<Actor>
+﻿<!-- Define model, we are using IEnumerable<T> instead of List<T>,becouse hard coding names in <th> is not option in this case -->
+@model IEnumerable<Producer>
 
 <!-- Define ViewData -->
 @{
-    ViewData["Titel"] = "List of Actors";
+    ViewData["Titel"] = "List of Producers";
 }
 
 <!-- Write code -->
@@ -35,11 +35,11 @@
                             @Html.DisplayFor(modelItem=>item.Bio)
                         </td>
                         <td class="align-middle">
-                            <div> 
+                            <div>
                                 <a class="btn btn-outline-primary btn-sm"><i class="bi bi-pencil-square"></i>Edit</a>
-                                <a class="btn btn-outline-info btn-sm"><i class="bi bi-eye"></i>Details</a> 
+                                <a class="btn btn-outline-info btn-sm"><i class="bi bi-eye"></i>Details</a>
                                 <a class="btn btn-danger text-white btn-sm "><i class="bi bi-trash"></i>Delete</a>
-                           </div>
+                            </div>
                         </td>
                     </tr>
                 }
@@ -48,4 +48,3 @@
         </table>
     </div>
 </div>
-
