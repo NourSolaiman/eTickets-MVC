@@ -1,9 +1,9 @@
 ﻿<!-- Define model, we are using IEnumerable<T> instead of List<T>,becouse hard coding names in <th> is not option in this case -->
-@model IEnumerable<Cinema>
+@model IEnumerable<Movie>
 
 <!-- Define ViewData -->
 @{
-    ViewData["Titel"] = "List of Cinemas";
+    ViewData["Titel"] = "List of Movies";
 }
 
 <!-- Write code -->
@@ -13,10 +13,10 @@
         <table class="table">
             <thead>
                 <tr class="text-center">
-                    <th>@Html.DisplayNameFor(model=>model.Logo)</th> <!--insted of hard coding name in tabel header <th>,we are using Display Name from Actor.cs-->
+                    <th>@Html.DisplayNameFor(model=>model.ImageURL)</th> <!--insted of hard coding name in tabel header <th>,we are using Display Name from Actor.cs-->
                     <th>@Html.DisplayNameFor(model=>model.Name)</th>
                     <th>@Html.DisplayNameFor(model=>model.Description)</th>
-                    <th>Actions</th>
+                    
                 </tr>
             </thead>
             <tbody>
@@ -25,7 +25,7 @@
                     <tr class="text-center">
                         <td class="align-middle">
                             <!--class="align-middle" is for seting picture in the middle-->
-                            <img class="rounded-circle" src="@item.Logo" alt="@item.Name" style="max-width: 150px" />
+                            <img class="rounded-circle" src="@item.ImageURL" alt="@item.Name" style="max-width: 150px" />
 
                         </td>
                         <td class="align-middle">
@@ -34,13 +34,7 @@
                         <td class="align-middle">
                             @Html.DisplayFor(modelItem=>item.Description)
                         </td>
-                        <td class="align-middle" >
-                            <div >
-                                <a class="btn btn-outline-primary btn-sm "><i class="bi bi-pencil-square"></i>Edit</a>
-                                <a class="btn btn-outline-info btn-sm"><i class="bi bi-eye"></i>Details</a>
-                                <a class="btn btn-danger text-white btn-sm"><i class="bi bi-trash"></i>Delete</a>
-                            </div>
-                        </td>
+                        
                     </tr>
                 }
             </tbody>

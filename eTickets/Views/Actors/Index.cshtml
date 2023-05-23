@@ -9,7 +9,7 @@
 <!-- Write code -->
 
 <div class="row">
-    <div class="col-md-8 offset-md-2">
+    <div class="col-md-9 offset-md-2">
         <table class="table">
             <thead>
                 <tr class="text-center">
@@ -22,7 +22,7 @@
             <tbody>
                 @foreach (var item in Model) // in this case Model is IEnumerable<Actor>
                 {
-                    <tr>
+                    <tr class="text-center">
                         <td class="align-middle">
                             <!--class="align-middle" is for seting picture in the middle-->
                             <img class="rounded-circle" src="@item.ProfilePictureURL" alt="@item.FullName" style="max-width: 150px" />
