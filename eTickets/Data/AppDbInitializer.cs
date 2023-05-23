@@ -162,7 +162,7 @@ namespace eTickets.Data
                             Description = "This is the The No Country For Old Men description",
                             Price = 79,
                             ImageURL = "https://dotnethow.net/images/movies/movie-2.jpeg",
-                            StartDate = DateTime.Now,
+                            StartDate = DateTime.Now.AddDays(2),
                             EndDate = DateTime.Now.AddDays(23),
                             CinemaId = 2,
                             ProducerId = 2,
@@ -174,8 +174,8 @@ namespace eTickets.Data
                             Description = "This is the Life movie's description",
                             Price = 59,
                             ImageURL = "https://dotnethow.net/images/movies/movie-3.jpeg",
-                            StartDate = DateTime.Now.AddDays(-3),
-                            EndDate = DateTime.Now.AddDays(15),
+                            StartDate = DateTime.Now.AddDays(-15),
+                            EndDate = DateTime.Now.AddDays(-1),
                             CinemaId = 3,
                             ProducerId = 3,
                             MovieCategory = MovieCategory.Horror
@@ -188,7 +188,7 @@ namespace eTickets.Data
                             Price = 59,
                             ImageURL = "https://dotnethow.net/images/movies/movie-4.jpeg",
                             StartDate = DateTime.Now,
-                            EndDate = DateTime.Now.AddDays(7),
+                            EndDate = DateTime.Now.AddDays(15),
                             CinemaId = 4,
                             ProducerId = 4,
                             MovieCategory = MovieCategory.Horror
