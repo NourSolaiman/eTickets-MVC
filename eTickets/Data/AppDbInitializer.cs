@@ -147,7 +147,7 @@ namespace eTickets.Data
                         new Movie()
                         {
                             Name = "The Shawshank Redemption",
-                            Description = "This is the The Shawshank Redemption movie's description",
+                            Description = "This is the The Shawshank Redemption description",
                             Price = 59,
                             ImageURL = "https://dotnethow.net/images/movies/movie-1.jpeg",
                             StartDate = DateTime.Now.AddDays(3),
@@ -159,7 +159,7 @@ namespace eTickets.Data
                         new Movie()
                         {
                             Name = "No Country For Old Men",
-                            Description = "This is the The No Country For Old Men movie's description",
+                            Description = "This is the The No Country For Old Men description",
                             Price = 79,
                             ImageURL = "https://dotnethow.net/images/movies/movie-2.jpeg",
                             StartDate = DateTime.Now,
