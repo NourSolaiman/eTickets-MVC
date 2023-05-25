@@ -1,24 +1,24 @@
 ﻿using eTickets.Data;
+using eTickets.Data.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace eTickets.Controllers
 {
     public class ActorsController : Controller
     {
-        //inject Dbcontext file,we use context file to send or get data from DB
-        //each controller must have DbContext file
-        private readonly AppDbContext _context; //first we have to declare AppDbContext
+        //Injecting IActorsService,becouse we have decide to move DbContext from Controlers to the ActorsService
+        private readonly IActorsService _service; //first we have to introduce/declare IActorService
 
-        //In order to use DbContext we have to create constructor and inject DbContext
+        //In order to use IActorsService we have to create constructor and inject IActorService
 
-        public ActorsController(AppDbContext context)
+        public ActorsController(IActorsService service)
         {
-            _context = context; //assign the value
+            _service = service; //assign the value
         }
-        public IActionResult Index()
+        public async Task <IActionResult> Index()
         {
             //get data
-            var data=_context.Actors.ToList();  
+            var data =await _service.GetAll();  
             return View(data);
         }
     }
