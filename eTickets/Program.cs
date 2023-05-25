@@ -17,7 +17,7 @@ namespace eTickets
             builder.Services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnectionString")));
 
-            //Service configure
+            //Service configure,Registring Service
             builder.Services.AddScoped<IActorsService, ActorsService>();
 
             // Add services to the container.

@@ -21,5 +21,11 @@ namespace eTickets.Controllers
             var data =await _service.GetAll();  
             return View(data);
         }
+
+        //Get: Actors/Create , Becouse we dont have any data manipulation we are going to use sync method
+        public IActionResult Create()
+        {
+            return View();
+        }
     }
 }
