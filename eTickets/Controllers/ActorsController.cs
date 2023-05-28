@@ -1,6 +1,8 @@
 ﻿using eTickets.Data;
 using eTickets.Data.Services;
+using eTickets.Models;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace eTickets.Controllers
 {
@@ -27,5 +29,22 @@ namespace eTickets.Controllers
         {
             return View();
         }
+
+        //Creating Post request for sending data to Db,becouse we have 4 prop i Actor Model
+        // and 3 in our create form we have to bind them together with help of [Bind(" ")]
+
+        [HttpPost]
+        //ModelState.IsValid is checking if required prop are filled in
+        public async Task<IActionResult> Create([Bind("FullName,ProfilePictureURL,Bio")] Actor actor)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(actor);// we are returning same view but with actor data
+            }
+            _service.Add(actor);// adding actor to Db
+            return RedirectToAction(nameof(Index));//after actor is added to Db we are redirect to the name of Index
+            
+        } 
+
     }
 }
