@@ -26,7 +26,16 @@ namespace eTickets.Data.Services
             await _context.SaveChangesAsync();
         }
 
-        
+        public Task<IEnumerable<Actor>> GetAllAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Actor> GetByIdAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<Actor> UpdateAsync(int id, Actor newActor)
         {
             _context.Update(newActor);
