@@ -41,19 +41,11 @@ namespace eTickets.Data.Services
             return result;
         }
 
-        public Actor Update(int id, Actor newActor)
+        public async Task <Actor> UpdateAsync(int id, Actor newActor)
         {
-            var actor = _context.Actors.Find(id);
-            if (actor != null)
-            {
-                // Update actor's properties here
-                // For example:
-                // actor.Name = newActor.Name;
-
-                _context.SaveChanges();
-                return actor;
-            }
-            return null;
+            _context.Update(newActor);
+            await _context.SaveChangesAsync();
+            return newActor;
         }
     }
 }
