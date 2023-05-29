@@ -26,7 +26,7 @@ namespace eTickets.Controllers
             return View(data);
         }
 
-        //Get: Actors/Create , Becouse we dont have any data manipulation we are going to use sync method
+        //Get: Actors/Create 
         public IActionResult Create()
         {
             return View();
@@ -70,12 +70,52 @@ namespace eTickets.Controllers
             else 
             {
                 return View(actorDetails); 
+            }                                  
+        }
+
+        //Get: Actors/Update
+        public async Task<IActionResult> Edit(int id)
+        {
+            var actorDetails = await _service.GetByIdAsync(id);
+
+            if (actorDetails == null)
+            {
+                return View("Not Found");
             }
-            
-            
-              
+            else
+            {
+                return View(actorDetails);
+            }
+           
+        }
+
+        //Creating Post request for sending data to Db,becouse we have 4 prop i Actor Model
+        // and 3 in our create form we have to bind them together with help of [Bind(" ")]
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id,[Bind("Id,FullName,ProfilePictureURL,Bio")] Actor actor)
+        {
+            var validationContext = new ValidationContext(actor);
+            var validationResults = new List<ValidationResult>();
+
+            bool isValidProfilePictureURL = Validator.TryValidateProperty(actor.ProfilePictureURL, new ValidationContext(actor, null, null) { MemberName = "ProfilePictureURL" }, validationResults);
+            bool isValidFullName = Validator.TryValidateProperty(actor.FullName, new ValidationContext(actor, null, null) { MemberName = "FullName" }, validationResults);
+            bool isValidBio = Validator.TryValidateProperty(actor.Bio, new ValidationContext(actor, null, null) { MemberName = "Bio" }, validationResults);
+
+            bool isValidName = isValidFullName; // Add similar checks for other properties if needed
+            bool isValidPictureURL = isValidProfilePictureURL;
+            bool isValidBiography = isValidBio;
+
+            if (!isValidName || !isValidPictureURL || !isValidBiography)
+            {
+                return View(actor);
+            }
+            await _service.UpdateAsync(id,actor);// adding actor to Db
+            return RedirectToAction(nameof(Index));
 
         }
-       
+
+
     }
 }
+ 
