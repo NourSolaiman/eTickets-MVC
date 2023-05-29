@@ -35,10 +35,10 @@
                             @Html.DisplayFor(modelItem=>item.Bio)
                         </td>
                         <td class="align-middle">
-                            <div> 
-                                <a class="btn btn-outline-primary btn-sm"><i class="bi bi-pencil-square"></i>Edit</a>
-                                <a class="btn btn-outline-info btn-sm"><i class="bi bi-eye"></i>Details</a> 
-                                <a class="btn btn-danger text-white btn-sm "><i class="bi bi-trash"></i>Delete</a>
+                            <div>
+                                <a class="btn btn-outline-primary btn-sm" asp-action="Edit" asp-route-id="@item.Id"><i class="bi bi-pencil-square"></i>Edit</a>
+                                <a class="btn btn-outline-info btn-sm"  asp-action="Details" asp-route-id="@item.Id"><i class="bi bi-eye"></i>Details</a>
+                                <a class="btn btn-danger text-white btn-sm" asp-action="Delete" asp-route-id="@item.Id"><i class="bi bi-trash"></i>Delete</a>
                            </div>
                         </td>
                     </tr>
@@ -50,7 +50,7 @@
 </div>
 
 <!--Creating new button-->
-<div class="text-white" style="position:fixed; right:10px; bottom:10px; " >
+<div class="text-white" style="position:fixed; right:10px; bottom:60px; " >
     <a asp-controller="Actors" asp-action="Create" class="btn btn-success"><i class="bi bi-plus-circle "></i> Add New</a>
 </div>
 

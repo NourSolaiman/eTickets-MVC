@@ -2,7 +2,9 @@
 using eTickets.Data.Services;
 using eTickets.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace eTickets.Controllers
 {
@@ -20,7 +22,7 @@ namespace eTickets.Controllers
         public async Task <IActionResult> Index()
         {
             //get data
-            var data =await _service.GetAll();  
+            var data =await _service.GetAllAsync();  
             return View(data);
         }
 
@@ -34,17 +36,46 @@ namespace eTickets.Controllers
         // and 3 in our create form we have to bind them together with help of [Bind(" ")]
 
         [HttpPost]
-        //ModelState.IsValid is checking if required prop are filled in
         public async Task<IActionResult> Create([Bind("FullName,ProfilePictureURL,Bio")] Actor actor)
-        {
-            if (!ModelState.IsValid)
+        {            
+            var validationContext = new ValidationContext(actor);
+            var validationResults = new List<ValidationResult>();
+
+            bool isValidProfilePictureURL = Validator.TryValidateProperty(actor.ProfilePictureURL, new ValidationContext(actor, null, null) { MemberName = "ProfilePictureURL" }, validationResults);
+            bool isValidFullName = Validator.TryValidateProperty(actor.FullName, new ValidationContext(actor, null, null) { MemberName = "FullName" }, validationResults);
+            bool isValidBio = Validator.TryValidateProperty(actor.Bio, new ValidationContext(actor, null, null) { MemberName = "Bio" }, validationResults);
+
+            bool isValidName = isValidFullName; // Add similar checks for other properties if needed
+            bool isValidPictureURL = isValidProfilePictureURL;
+            bool isValidBiography = isValidBio;
+
+            if (!isValidName || !isValidPictureURL || !isValidBiography)
             {
-                return View(actor);// we are returning same view but with actor data
+                return View(actor);
             }
-            _service.Add(actor);// adding actor to Db
-            return RedirectToAction(nameof(Index));//after actor is added to Db we are redirect to the name of Index
-            
+           await _service.AddAsync(actor);// adding actor to Db
+            return RedirectToAction(nameof(Index));
+
         } 
 
+        //Get: Actors/Details/ by Id
+        public async Task<IActionResult> Details(int id)
+        {
+            var actorDetails=await _service.GetByIdAsync(id);
+
+            if (actorDetails==null)
+            {
+                return View("Not Found");
+            }
+            else 
+            {
+                return View(actorDetails); 
+            }
+            
+            
+              
+
+        }
+       
     }
 }
