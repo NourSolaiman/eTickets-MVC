@@ -89,9 +89,6 @@ namespace eTickets.Controllers
            
         }
 
-        //Creating Post request for sending data to Db,becouse we have 4 prop i Actor Model
-        // and 3 in our create form we have to bind them together with help of [Bind(" ")]
-
         [HttpPost]
         public async Task<IActionResult> Edit(int id,[Bind("Id,FullName,ProfilePictureURL,Bio")] Actor actor)
         {
@@ -111,6 +108,39 @@ namespace eTickets.Controllers
                 return View(actor);
             }
             await _service.UpdateAsync(id,actor);// adding actor to Db
+            return RedirectToAction(nameof(Index));
+
+        }
+
+        //Get: Actors/Delete
+        public async Task<IActionResult> Delete(int id)
+        {
+            var actorDetails = await _service.GetByIdAsync(id);
+
+            if (actorDetails == null)
+            {
+                return View("Not Found");
+            }
+            else
+            {
+                return View(actorDetails);
+            }
+
+        }
+
+        [HttpPost,ActionName("Delete")]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var actorDetails = await _service.GetByIdAsync(id);
+
+            if (actorDetails == null)
+            {
+                return View("Not Found");
+            }
+            else
+                await _service.DeleteAsync(id);
+
+          
             return RedirectToAction(nameof(Index));
 
         }
