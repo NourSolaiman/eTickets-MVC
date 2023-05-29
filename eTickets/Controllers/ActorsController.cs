@@ -2,6 +2,7 @@
 using eTickets.Data.Services;
 using eTickets.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 
 namespace eTickets.Controllers
 {
@@ -18,22 +19,34 @@ namespace eTickets.Controllers
             var data = await _service.GetAllAsync();
             return View(data);
         }
-        //Get: Actors/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        [HttpPost]
+        //Get: Actors/Create             
         public async Task<IActionResult> Create([Bind("FullName,ProfilePictureURL,Bio")] Actor actor)
         {
-            if (!ModelState.IsValid)
+            var validationContext = new ValidationContext(actor);
+            var validationResults = new List<ValidationResult>();
+
+
+
+            bool isValidProfilePictureURL = Validator.TryValidateProperty(actor.ProfilePictureURL, new ValidationContext(actor, null, null) { MemberName = "ProfilePictureURL" }, validationResults);
+            bool isValidFullName = Validator.TryValidateProperty(actor.FullName, new ValidationContext(actor, null, null) { MemberName = "FullName" }, validationResults);
+            bool isValidBio = Validator.TryValidateProperty(actor.Bio, new ValidationContext(actor, null, null) { MemberName = "Bio" }, validationResults);
+
+
+
+            bool isValidName = isValidFullName; // Add similar checks for other properties if needed
+            bool isValidPictureURL = isValidProfilePictureURL;
+            bool isValidBiography = isValidBio;
+
+
+
+            if (!isValidName || !isValidPictureURL || !isValidBiography)
             {
                 return View(actor);
             }
-            await _service.AddAsync(actor);
-            return RedirectToAction(nameof(Index));
+            await _service.AddAsync(actor);// adding actor to Db
+            return RedirectToAction(nameof(Index));
         }
+
         //Get: Actors/Details/1
         public async Task<IActionResult> Details(int id)
         {
@@ -44,6 +57,7 @@ namespace eTickets.Controllers
         }
 
         //Get: Actors/Edit/1
+        [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
             var actorDetails = await _service.GetByIdAsync(id);
@@ -54,7 +68,18 @@ namespace eTickets.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(int id, [Bind("Id, FullName,ProfilePictureURL,Bio")] Actor actor)
         {
-            if (!ModelState.IsValid)
+            var validationContext = new ValidationContext(actor);
+            var validationResults = new List<ValidationResult>();
+
+            bool isValidProfilePictureURL = Validator.TryValidateProperty(actor.ProfilePictureURL, new ValidationContext(actor, null, null) { MemberName = "ProfilePictureURL" }, validationResults);
+            bool isValidFullName = Validator.TryValidateProperty(actor.FullName, new ValidationContext(actor, null, null) { MemberName = "FullName" }, validationResults);
+            bool isValidBio = Validator.TryValidateProperty(actor.Bio, new ValidationContext(actor, null, null) { MemberName = "Bio" }, validationResults);
+
+            bool isValidName = isValidFullName; // Add similar checks for other properties if needed
+            bool isValidPictureURL = isValidProfilePictureURL;
+            bool isValidBiography = isValidBio;
+
+            if (!isValidName || !isValidPictureURL || !isValidBiography)
             {
                 return View(actor);
             }
