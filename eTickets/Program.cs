@@ -1,5 +1,6 @@
 using eTickets.Data;
 using eTickets.Data.Services;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace eTickets
@@ -17,6 +18,9 @@ namespace eTickets
             builder.Services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnectionString")));
 
+            //Identity function configuration
+            builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
+            
             //Service configure,Registring Service
             builder.Services.AddScoped<IActorsService, ActorsService>();
 
@@ -38,7 +42,14 @@ namespace eTickets
 
             app.UseRouting();
 
+            //Identity part
+            app.UseAuthentication();
+
             app.UseAuthorization();
+            
+            
+
+
 
             app.MapControllerRoute(
                 name: "default",

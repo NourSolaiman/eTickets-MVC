@@ -1,9 +1,11 @@
 ﻿using eTickets.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace eTickets.Data
-{
-    public class AppDbContext:DbContext
+{   //We have changed DbContext with IdentityDbContext<IdentityUser>
+    public class AppDbContext:IdentityDbContext<IdentityUser>
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
@@ -30,6 +32,8 @@ namespace eTickets.Data
         public DbSet<Actor_Movie> Actors_Movies { get; set; }
         public DbSet<Cinema> Cinemas { get; set; }
         public DbSet<Producer> Producers { get; set; }
+
+        public DbSet<Login> Logins { get; set; }
         // Defined the relationships between all the modules & Complited appDbContext-file
     }
 }
