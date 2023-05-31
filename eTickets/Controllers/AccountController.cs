@@ -57,7 +57,7 @@ namespace eTickets.Controllers
                 }
             }
 
-            ModelState.AddModelError("", "Username/password not found");
+            ModelState.AddModelError("", "Username/password are incorrect or not found. To register new account go Reister");
             return View(login);
 
 
@@ -93,9 +93,10 @@ namespace eTickets.Controllers
             }
             else
             {
+
                 foreach (var err in result.Errors)
                 {
-                    ModelState.AddModelError("", $"{err.Description}");
+                    ModelState.AddModelError("",err.Description);
                 }
             }
         }
