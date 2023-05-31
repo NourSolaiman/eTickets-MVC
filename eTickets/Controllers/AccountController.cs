@@ -57,7 +57,7 @@ namespace eTickets.Controllers
                 }
             }
 
-            ModelState.AddModelError("", "Username/password are incorrect or not found. To register new account go Reister");
+            ModelState.AddModelError("", "Username or password are incorrect or not found. To register new account go to Register");
             return View(login);
 
 
