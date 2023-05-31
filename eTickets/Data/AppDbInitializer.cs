@@ -1,21 +1,45 @@
-﻿using eTickets.Data.Enums;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Identity;
 using eTickets.Models;
-using System.Diagnostics.Metrics;
-using System.Runtime.CompilerServices;
-using System.Security.Cryptography;
-using static System.Net.WebRequestMethods;
+using eTickets.Data;
+using eTickets.Data.Enums;
+
 
 namespace eTickets.Data
 {
     public class AppDbInitializer
     {
-        public static void Seed(IApplicationBuilder applicationBuilder)
+        public static async Task SeedAsync(IApplicationBuilder applicationBuilder)
         {
+
+
+
             using (var serviceScope = applicationBuilder.ApplicationServices.CreateScope())
             {
-              
+
                 var context = serviceScope.ServiceProvider.GetService<AppDbContext>();
                 context.Database.EnsureCreated();
+
+                var roleManager = serviceScope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+
+                // Define admin role
+                if (!await roleManager.RoleExistsAsync("Admin"))
+                {
+                    var adminRole = new IdentityRole("Admin");
+                    await roleManager.CreateAsync(adminRole);
+                }
+
+                // Define user role
+                if (!await roleManager.RoleExistsAsync("User"))
+                {
+                    var userRole = new IdentityRole("User");
+                    await roleManager.CreateAsync(userRole);
+                }
 
                 //Cinema
                 if (!context.Cinemas.Any())
