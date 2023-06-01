@@ -11,12 +11,15 @@ namespace eTickets.Controllers
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
-        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _roleManager = roleManager;
         }
+
 
         public IActionResult Login(string returnURL)
         {
@@ -36,13 +39,13 @@ namespace eTickets.Controllers
             bool isValidPassword = Validator.TryValidateProperty(login.Password, new ValidationContext(login, null, null) { MemberName = "Password" }, validationResults);
 
             bool isValidName = isValidUserName; // Add similar checks for other properties if needed
-
             bool isValidPass = isValidPassword;
 
             if (!isValidName || !isValidPass)
             {
                 return View(login);
             }
+
             var user = await _userManager.FindByNameAsync(login.UserName);
 
             if (user != null)
@@ -50,6 +53,15 @@ namespace eTickets.Controllers
                 var result = await _signInManager.PasswordSignInAsync(user, login.Password, false, false);
                 if (result.Succeeded)
                 {
+                    if (await _userManager.IsInRoleAsync(user, "Admin"))
+                    {
+                        // Användaren är en admin, gör admin-specifika åtgärder här
+                    }
+                    else if (await _userManager.IsInRoleAsync(user, "User"))
+                    {
+                        // Användaren är en vanlig användare, gör användar-specifika åtgärder här
+                    }
+
                     if (string.IsNullOrEmpty(login.ReturnURL))
                         return RedirectToAction("Index", "Movies");
 
@@ -59,9 +71,8 @@ namespace eTickets.Controllers
 
             ModelState.AddModelError("", "Username/password not found");
             return View(login);
-
-
         }
+
 
         public IActionResult Register() => View();
 
@@ -88,9 +99,8 @@ namespace eTickets.Controllers
                     user: user, password: login.Password);
                 if (result.Succeeded)
                 {
-                    return RedirectToAction(
-                        actionName: "Index", controllerName: "Movies");
-                }
+					return RedirectToAction("LoggedIn");
+				}
                 else
                 {
                     foreach (var err in result.Errors)
@@ -103,9 +113,13 @@ namespace eTickets.Controllers
 
         }
 
-        public ViewResult LoggedIn() => View();
+		public IActionResult LoggedIn()
+		{
+			return View();
+		}
 
-        public IActionResult Logout()
+
+		public IActionResult Logout()
         {
             return View();
         }

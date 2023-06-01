@@ -1,7 +1,4 @@
-﻿
-    a .navbar-brand
-
-{
+﻿a .navbar-brand {
     white-space: normal;
     text-align: center;
     word-break: break-all;
@@ -11,13 +8,24 @@ a {
     color: #0077cc;
 }
 
+.btn-link.nav-link.text-dark:hover,
+.btn-link.nav-link.text-dark:focus {
+    color: green !important;
+}
+
+    .btn-link.nav-link.text-dark:hover .bi,
+    .btn-link.nav-link.text-dark:focus .bi {
+        filter: brightness(1.5);
+    }
+
 .btn-primary {
     color: #fff;
     background-color: #1b6ec2;
     border-color: #1861ac;
 }
 
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
     color: #fff;
     background-color: #1b6ec2;
     border-color: #1861ac;
@@ -47,4 +55,3 @@ button.accept-policy {
     white-space: nowrap;
     line-height: 60px;
 }
-

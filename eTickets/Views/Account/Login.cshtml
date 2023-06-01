@@ -28,6 +28,18 @@
                     <input type="submit" class="btn btn-success" value="Log in" />
                 </div>
             </div>
+
+            @if (!ViewData.ModelState.IsValid)
+            {
+                <div class="mb-3">
+                    <div class="text-danger">
+                        @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                        {
+                            <p>@error.ErrorMessage</p>
+                        }
+                    </div>
+                </div>
+            }
         </form>
     </div>
 </div>
