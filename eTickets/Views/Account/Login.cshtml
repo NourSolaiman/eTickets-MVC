@@ -1,45 +1,61 @@
 ﻿@model Login
 
-<div class="row loginForm">
-    <div class="col-md-8 offset-md-2">
-        <h2>Please log in before placing an order.</h2>
-        <form asp-controller="Account" asp-action="Login" method="post" class="form-horizontal" role="form">
-            <h4>Enter your details below</h4>
-            <hr />
-            <input type="hidden" asp-for="ReturnURL" />
-            <div class="mb-3">
-                <label asp-for="UserName" class="col-md-2 col-form-label"></label>
-                <div class="col-md-10">
-                    <input asp-for="UserName" class="form-control" />
-                    <span asp-validation-for="UserName" class="text-danger"></span>
-                </div>
-            </div>
+<style>
+    body {
+        background-image: url("https://www.learner.org/wp-content/uploads/2019/01/American-Cinema-main-fig1.jpg");
+        background-size: cover;
+        background-position: center;
+    }
 
-            <div class="mb-3">
-                <label asp-for="Password" class="col-md-2 col-form-label"></label>
-                <div class="col-md-10">
-                    <input asp-for="Password" class="form-control" />
-                    <span asp-validation-for="Password" class="text-danger"></span>
-                </div>
-            </div>
+    .card-transparent {
+        background-color: rgba(255, 255, 255, 0.8); /* White with 80% opacity */
+        padding: 20px;
+        border-radius: 15px;
+    }
 
-            <div class="mb-3 d-flex justify-content-end">
-                <div class="col-md-10">
-                    <input type="submit" class="btn btn-success" value="Log in" />
-                </div>
-            </div>
+    .btn-success:hover {
+        background-color: #6b664c;
+        color: white;
+    }
+</style>
+
+<div class="container d-flex justify-content-center align-items-center vh-100">
+    <div class="col-lg-6">
+        <div class="card card-transparent mt-4 mb-4 p-4 rounded">
+            <h2 class="text-center mb-4">Please log in before placing an order.</h2>
 
             @if (!ViewData.ModelState.IsValid)
             {
-                <div class="mb-3">
-                    <div class="text-danger">
-                        @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
-                        {
-                            <p>@error.ErrorMessage</p>
-                        }
-                    </div>
+                <div class="alert alert-danger">
+                    <strong>Error!</strong>
+                    @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                    {
+                        <div>@error.ErrorMessage</div>
+                    }
                 </div>
             }
-        </form>
+
+            <form asp-controller="Account" asp-action="Login" method="post" role="form">
+                <h4 class="text-center mb-3">Enter your details below</h4>
+                <hr />
+                <input type="hidden" asp-for="ReturnURL" />
+
+                <div class="form-group">
+                    <label asp-for="UserName"></label>
+                    <input asp-for="UserName" class="form-control" placeholder="Username" required aria-label="Username" />
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Password"></label>
+                    <input asp-for="Password" class="form-control" type="password" placeholder="Password" required aria-label="Password" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+
+                <div class="form-group text-start">
+                    <button type="submit" class="btn btn-success">Log in</button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>

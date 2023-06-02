@@ -21,15 +21,15 @@ namespace eTickets.Controllers
         }
 
 
-        public IActionResult Login(string returnURL)
-        {
-            return View(new Login
-            {
-                ReturnURL = returnURL
-            });
-        }
+		public IActionResult Login(string returnURL)
+		{
+			return View(new Login
+			{
+				ReturnURL = returnURL ?? Url.Action("Index", "Movies")
+			});
+		}
 
-        [HttpPost]
+		[HttpPost]
         public async Task<IActionResult> Login([Bind("UserName,Password")] Login login)
         {
             var validationContext = new ValidationContext(login);
@@ -120,11 +120,12 @@ namespace eTickets.Controllers
 
 
 		public IActionResult Logout()
-        {
-            return View();
-        }
+		{
+			TempData["ReturnUrl"] = Request.Headers["Referer"].ToString();
+			return View();
+		}
 
-        [HttpPost]
+		[HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> LogoutConfirmed()
         {
