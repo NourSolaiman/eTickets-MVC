@@ -57,7 +57,7 @@
 
 					<form style="padding-right: 25px;" asp-controller="Movies" asp-action="Filter">
 						<div class="d-flex">
-							<input name="searchString" type="text" class="form-control" placeholder="Search for a movie..." aria-label="Recipient's username" aria-describedby="button-addon2">
+						<input name="searchString" type="text" class="form-control" style="background-color: lightgray;" placeholder="Search for a movie..." aria-label="Recipient's username" aria-describedby="button-addon2">
 							<button class="btn btn-Secondary my-2 my-sm-0" type="submit"><i class="bi bi-search"></i></button>
 						</div>
 					</form>
@@ -76,10 +76,10 @@
 						else
 						{
 							<li class="nav-item">
-								<a class="btn btn-Secondary text-white" style="margin-right: 10px;" href="/Account/Register">Register</a>
+								<a class="btn btn-Secondary text-black" style="margin-right: 10px;" href="/Account/Register">Register</a>
 							</li>
 							<li class="nav-item">
-								<a class="btn btn-Secondary text-white" href="/Account/Login">Login</a>
+								<a class="btn btn-Secondary text-black" href="/Account/Login">Login</a>
 							</li>
 
 						}
