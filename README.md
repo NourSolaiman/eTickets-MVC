@@ -1,7 +1,7 @@
 # eTickets-MVC
 
 Overview
-eTickets is a web-based application that aims to streamline the process of buying and selling tickets for various events. This user-friendly platform provides a convenient ticketing experience, making it straightforward for customers to find and purchase tickets, and for event organizers to manage their ticket sales and distributions.
+eTickets is a web-based application that aims to streamline the process of buying and selling tickets for various movies'tickets from different Cinemas in the city. This user-friendly platform provides a convenient ticketing experience, making it straightforward for customers to find and purchase tickets, and for event organizers to manage their ticket sales and distributions.
 
 Key Features
 Event Creation and Management: eTickets allows event organizers to create and manage their events effortlessly. They can add new events, provide necessary details, set ticket prices, and oversee their listings.
