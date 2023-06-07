@@ -1,10 +1,12 @@
 ﻿using eTickets.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace eTickets.Controllers
 {
-    public class CinemasController : Controller
+	[Authorize(Roles = "Admin")]
+	public class CinemasController : Controller
     {
         private readonly AppDbContext _context;
 
