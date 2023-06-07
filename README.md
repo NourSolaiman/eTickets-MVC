@@ -4,13 +4,13 @@ Overview
 eTickets is a web-based application that aims to streamline the process of buying and selling tickets for various movies'tickets from different Cinemas in the city. This user-friendly platform provides a convenient ticketing experience, making it straightforward for customers to find and purchase tickets, and for event organizers to manage their ticket sales and distributions.
 
 Key Features
-Event Creation and Management: eTickets allows event organizers to create and manage their events effortlessly. They can add new events, provide necessary details, set ticket prices, and oversee their listings.
+Event Creation and Management: eTickets allows event organizers to create and manage their movies effortlessly. They can add new movies, provide necessary details, set ticket prices, and oversee their listings.
 
-Ticket Purchasing: Customers can browse through the events listed, select the one they are interested in, and purchase tickets directly on the platform.
+Ticket Purchasing: Customers can browse through the movies listed, select the one they are interested in, and purchase tickets directly on the platform.
 
 User Authentication and Authorization: The app includes secure user registration and sign-in processes. It also offers role-based access control, ensuring a clear distinction between event organizer and customer functionalities.
 
-Payment Processing: eTickets integrates a secure and dependable payment gateway for ticket payment processing.
+Payment Processing: eTickets integrates a secure and dependable payment gateway for ticket payment processing (this section is not done yet).
 
 Interactive User Interface: The app offers a user-friendly, intuitive interface that ensures smooth navigation.
 
