@@ -14,6 +14,10 @@ namespace eTickets.Models
         [Display(Name = "Biography")]
 
         public string Bio { get; set; }
+<<<<<<< HEAD
+=======
+        //Relationships
+>>>>>>> master
         public List<Movie> Movies { get; set; }
     }
 }

@@ -18,7 +18,11 @@ namespace eTickets.Models
 
         public string Description { get; set; }
 
+<<<<<<< HEAD
        
+=======
+        //Relationships
+>>>>>>> master
         public List<Movie> Movies { get; set; }
     }
 }
