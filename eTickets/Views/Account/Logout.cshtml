@@ -1,0 +1,32 @@
+﻿@model eTickets.Models.Login
+
+<style>
+    body {
+        background-image: url("https://www.learner.org/wp-content/uploads/2019/01/American-Cinema-main-fig1.jpg");
+        background-size: cover;
+        background-position: center;
+    }
+
+    .logout-modal {
+        background-color: rgba(0, 0, 0, 0.6);
+        padding: 20px;
+        border-radius: 15px;
+    }
+
+    .btn-Secondary:hover {
+        background-color: #6b664c;
+        color: white;
+    }
+</style>
+
+<div class="container d-flex justify-content-center align-items-center vh-100">
+    <div class="text-center text-white logout-modal">
+        <h2>Logout</h2>
+        <p>Are you sure you want to log out?</p>
+
+        <form method="post" asp-action="LogoutConfirmed" class="mb-3 text-center">
+            <button type="submit" class="btn btn-Secondary text-white">Log out</button>
+            <a href="@TempData["ReturnUrl"]" class="btn btn-danger">Cancel</a>
+        </form>
+    </div>
+</div>
